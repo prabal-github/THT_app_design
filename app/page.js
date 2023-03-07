@@ -56,8 +56,8 @@ export default function Home() {
                   <div className='text-xs'>
                     {readingTime(post.body).text}
                   </div>
-                  {/* <div className='mx-1.5'>&#x2022;</div>
-                  <Link href={'/'} className='hover:underline hover:text-blue-800'>Read more</Link> */}
+                  <div className='mx-1.5'>&#x2022;</div>
+                  <Link href={'/'} className='hover:underline hover:text-blue-800'>More</Link>
                 </div>
               </div>
             </div>
