@@ -8,7 +8,8 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 import readingTime from 'reading-time'
 import Moment from 'react-moment'
 import Link from 'next/link';
-import DotLoader from "react-spinners/ClipLoader";
+import { DoubleBubble } from 'react-spinner-animated';
+import 'react-spinner-animated/dist/index.css'
 
 export default function Home() {
   const { data, error, isLoading } = useSWR(
@@ -23,20 +24,15 @@ export default function Home() {
       <div className='p-2'>
         {!isLoading && <div className='flex gap-2 p-2 justify-center items-center overflow-x-scroll scrollbar-hide w-full'>
           {categories.map((category) => (
-            <div key={category} className=' bg-purple-200 rounded-xl shadow-md px-2 py-1 w-full'>
+            <div key={category} className='bg-purple-200 rounded-xl shadow-md px-2 py-1'>
               {category}
             </div>
           ))}
         </div>}
         <div className='h-full'>
-          {isLoading && <div className='flex justify-center items-center h-screen'>
-            <DotLoader
-              color={'#000'}
-              loading={isLoading}
-              size={35}
-              aria-label="Loading Spinner"
-              data-testid="loader"
-            />
+          {isLoading && <div className='flex justify-center items-center h-[80vh]'>
+            <DoubleBubble text={"Loading..."} bgColor={"#F3E8FF"}
+              center={false} width={"150px"} height={"150px"} />
           </div>}
           {!isLoading && data.map((post) => (
             <div key={post._id} className='flex bg-purple-300 my-5 items-center justify-center rounded-2xl shadow-lg gap-3'>
@@ -65,7 +61,7 @@ export default function Home() {
         </div>
       </div>
 
-      <Pagination />
+      {!isLoading && <Pagination />}
 
       <Footer />
     </main>
