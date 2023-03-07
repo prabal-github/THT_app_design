@@ -8,6 +8,8 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 import readingTime from 'reading-time'
 import Moment from 'react-moment'
 import Link from 'next/link';
+import DotLoader from "react-spinners/ClipLoader";
+
 export default function Home() {
   const { data, error, isLoading } = useSWR(
     "https://the-hit-times-admin-production.up.railway.app/api/posts?limit=10",
@@ -27,15 +29,24 @@ export default function Home() {
           ))}
         </div>}
         <div className='h-full'>
+          {isLoading && <div className='flex justify-center items-center h-screen'>
+            <DotLoader
+              color={'#000'}
+              loading={isLoading}
+              size={35}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>}
           {!isLoading && data.map((post) => (
             <div key={post._id} className='flex bg-purple-300 my-5 items-center justify-center rounded-2xl shadow-lg gap-3'>
               <div className='w-1/2'>
-                <img src={post.link} className=' rounded-l-2xl' />
+                <img src={post.link} className='h-fit rounded-l-2xl' />
               </div>
-              <div className='w-2/3 p-5 h-full flex flex-col justify-center gap-3'>
+              <div className='w-2/3 px-3 h-full flex flex-col justify-center gap-2'>
                 <div>
-                  <div className='font-bold text-lg'>{post.title}</div>
-                  <div className='line-clamp-3'>{post.body}</div>
+                  <div className='line-clamp-1 font-bold text-lg'>{post.title}</div>
+                  <div className='line-clamp-2'>{post.body}</div>
                 </div>
                 <div className='flex text-xs'>
                   <span>
@@ -45,8 +56,8 @@ export default function Home() {
                   <div className='text-xs'>
                     {readingTime(post.body).text}
                   </div>
-                  <div className='mx-1.5'>&#x2022;</div>
-                  <Link href={'/'} className='hover:underline hover:text-blue-800'>Read more</Link>
+                  {/* <div className='mx-1.5'>&#x2022;</div>
+                  <Link href={'/'} className='hover:underline hover:text-blue-800'>Read more</Link> */}
                 </div>
               </div>
             </div>
