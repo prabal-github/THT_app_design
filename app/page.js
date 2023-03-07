@@ -15,7 +15,7 @@ export default function Home() {
     'Campus Raid', 'Thursday Article', 'Funny Friday', 'Viral Corner', 'Word Worth Millions', 'College Heracles', 'Nanotips', 'Vernacular']
   return (
     <main className=''>
-      <header className='sticky top-1.5 z-20 bg-purple-100 w-full flex justify-between px-5 py-3 items-center rounded-xl shadow-xl'>
+      <header className='sticky top-1.5 z-20 bg-purple-100 w-full flex justify-between px-5 py-3 mx-2 items-center rounded-xl shadow-xl'>
         <div className='font-bold text-3xl'>
           The HIT Times
         </div>
@@ -72,7 +72,7 @@ export default function Home() {
         </ul>
       </nav>
 
-      <footer className='sticky bottom-1.5 z-20 bg-purple-100 w-full flex justify-between px-10 py-3 items-center rounded-xl shadow-xl'>
+      <footer className='sticky bottom-0 z-20 bg-purple-100 w-full flex justify-between px-10 py-3 items-center rounded-xl shadow-xl'>
         <div className='flex flex-col justify-center items-center'>
           <PhotoIcon className="h-6 w-6 cursor-pointer" />
           <div>Weeklies</div>
