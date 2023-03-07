@@ -21,7 +21,7 @@ export default function Home() {
       <div className='p-2'>
         {!isLoading && <div className='flex gap-2 p-2 justify-center items-center overflow-x-scroll scrollbar-hide w-full'>
           {categories.map((category) => (
-            <div key={category} className='border-2 rounded-xl px-2 py-1 w-full'>
+            <div key={category} className=' bg-purple-200 rounded-xl shadow-md px-2 py-1 w-full'>
               {category}
             </div>
           ))}

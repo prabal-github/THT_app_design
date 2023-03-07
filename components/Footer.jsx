@@ -4,7 +4,7 @@ import { BellAlertIcon, NewspaperIcon, ArrowTopRightOnSquareIcon, PhotoIcon } fr
 
 export function Footer({}) {
   return (
-    <footer className="sticky bottom-0 z-20 bg-purple-100 w-full flex justify-between px-4 py-3 items-center rounded-xl shadow-xl">
+    <footer className="sticky bottom-0 z-20 text-xs bg-purple-100 w-full flex justify-between px-4 py-3 items-center rounded-xl shadow-xl">
       <div className="flex flex-col justify-center items-center">
         <PhotoIcon className="h-6 w-6 cursor-pointer" />
         <div>Weeklies</div>
