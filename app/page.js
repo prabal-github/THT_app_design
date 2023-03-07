@@ -11,7 +11,6 @@ export default function Home() {
     "https://the-hit-times-admin-production.up.railway.app/api/posts?limit=10",
     fetcher
   );
-  console.log(data);
   const categories = ['Monday Hues',
     'Campus Raid', 'Thursday Article', 'Funny Friday', 'Viral Corner', 'Word Worth Millions', 'College Heracles', 'Nanotips', 'Vernacular']
   return (
@@ -30,19 +29,21 @@ export default function Home() {
             </div>
           ))}
         </div>
-        {!isLoading && data.map((post) => (
-          <div key={post._id} className='flex bg-purple-300 my-5 items-center justify-center rounded-2xl shadow-lg gap-3'>
-            <div className='w-1/2'>
-              <img src={post.link} className=' rounded-l-2xl' />
-            </div>
-            <div className='w-2/3 line-clamp-5 p-5 h-full flex flex-col gap-10 justify-center items-center'>
-              <div>
-                <div className='text-center font-bold text-lg'>{post.title}</div>
-                <div className=''>{post.body}</div>
+        <div className='h-full'>
+          {!isLoading && data.map((post) => (
+            <div key={post._id} className='flex bg-purple-300 my-5 items-center justify-center rounded-2xl shadow-lg gap-3'>
+              <div className='w-1/2'>
+                <img src={post.link} className=' rounded-l-2xl' />
+              </div>
+              <div className='w-2/3 line-clamp-5 p-5 h-full flex flex-col gap-10 justify-center items-center'>
+                <div>
+                  <div className='text-center font-bold text-lg'>{post.title}</div>
+                  <div className=''>{post.body}</div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <nav aria-label="Page navigation example" className='mb-10 flex items-center justify-center'>
