@@ -14,8 +14,8 @@ export default function Home() {
   const categories = ['Monday Hues',
     'Campus Raid', 'Thursday Article', 'Funny Friday', 'Viral Corner', 'Word Worth Millions', 'College Heracles', 'Nanotips', 'Vernacular']
   return (
-    <main className=''>
-      <header className='sticky top-1.5 z-20 bg-purple-100 w-full flex justify-between px-5 py-3 mx-2 items-center rounded-xl shadow-xl'>
+    <main className='flex flex-col justify-center items-center w-full'>
+      <header className='sticky top-1.5 z-20 bg-purple-100 w-full flex justify-between px-5 py-3 items-center rounded-xl shadow-xl'>
         <div className='font-bold text-3xl'>
           The HIT Times
         </div>
