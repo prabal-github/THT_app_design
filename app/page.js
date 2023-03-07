@@ -37,7 +37,7 @@ export default function Home() {
                   <div className='font-bold text-lg'>{post.title}</div>
                   <div className='line-clamp-3'>{post.body}</div>
                 </div>
-                <div className='flex gap-2 text-xs'>
+                <div className='flex text-xs'>
                   <span>
                     <Moment date={post.updatedAt} format='MMM DD' />
                   </span>
