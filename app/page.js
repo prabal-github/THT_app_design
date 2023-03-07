@@ -37,7 +37,6 @@ export default function Home() {
           {!isLoading && data.map((post) => (
             <div key={post._id} className='flex bg-purple-200 my-5 items-center justify-center rounded-2xl shadow-lg gap-3'>
               <div className='w-1/2'>
-                {/* <img src={post.link} className='h-fit rounded-l-2xl' /> */}
                 <Image
                   src={post.link}
                   alt={post.title}
