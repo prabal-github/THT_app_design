@@ -52,7 +52,7 @@ export default function Home() {
                 </div>
                 <div className='flex text-xs'>
                   <span>
-                    <Moment date={post.updatedAt} format='MMM DD' />
+                    <Moment date={post.updatedAt} format='MMM DD YYYY' />
                   </span>
                   <div className='mx-1.5'>&#x2022;</div>
                   <div className='text-xs'>
