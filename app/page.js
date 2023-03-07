@@ -1,91 +1,94 @@
+'use client';
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import useSWR from "swr";
+const fetcher = (url) => fetch(url).then((res) => res.json());
+import readingTime from 'reading-time'
+import { toPlainText } from '@portabletext/react'
+import { BellAlertIcon, NewspaperIcon, ArrowTopRightOnSquareIcon, PhotoIcon } from '@heroicons/react/24/solid'
 
 export default function Home() {
+  const { data, error, isLoading } = useSWR(
+    "https://the-hit-times-admin-production.up.railway.app/api/posts?limit=10",
+    fetcher
+  );
+  console.log(data);
+  const categories = ['Monday Hues',
+    'Campus Raid', 'Thursday Article', 'Funny Friday', 'Viral Corner', 'Word Worth Millions', 'College Heracles', 'Nanotips', 'Vernacular']
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className=''>
+      <header className='sticky top-1.5 z-20 bg-purple-100 w-full flex justify-between px-5 py-3 items-center rounded-xl shadow-xl'>
+        <div className='font-bold text-3xl'>
+          The HIT Times
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
+        <BellAlertIcon className="h-6 w-6 cursor-pointer" />
+      </header>
+      <div className='p-2'>
+        <div className='flex gap-2 p-2 justify-center items-center overflow-x-scroll scrollbar-hide w-full'>
+          {categories.map((category) => (
+            <div key={category} className='border-2 rounded-xl px-2 py-1 w-full'>
+              {category}
+            </div>
+          ))}
         </div>
+        {!isLoading && data.map((post) => (
+          <div key={post._id} className='flex bg-purple-300 my-5 items-center justify-center rounded-2xl shadow-lg gap-3'>
+            <div className='w-1/2'>
+              <img src={post.link} className=' rounded-l-2xl' />
+            </div>
+            <div className='w-2/3 line-clamp-5 p-5 h-full flex flex-col gap-10 justify-center items-center'>
+              <div>
+                <div className='text-center font-bold text-lg'>{post.title}</div>
+                <div className=''>{post.body}</div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+      <nav aria-label="Page navigation example" className='mb-10 flex items-center justify-center'>
+        <ul className="inline-flex -space-x-px">
+          <li>
+            <a href="#" className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+          </li>
+          <li>
+            <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+          </li>
+          <li>
+            <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+          </li>
+          <li>
+            <a href="#" aria-current="page" className="px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+          </li>
+          <li>
+            <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+          </li>
+          <li>
+            <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
+          </li>
+          <li>
+            <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+          </li>
+        </ul>
+      </nav>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <footer className='sticky bottom-1.5 z-20 bg-purple-100 w-full flex justify-between px-10 py-3 items-center rounded-xl shadow-xl'>
+        <div className='flex flex-col justify-center items-center'>
+          <PhotoIcon className="h-6 w-6 cursor-pointer" />
+          <div>Weeklies</div>
+        </div>
+        <div className='flex flex-col justify-center items-center'>
+          <NewspaperIcon className="h-6 w-6 cursor-pointer" />
+          <div>News</div>
+        </div>
+        <div className='flex flex-col justify-center items-center'>
+          <ArrowTopRightOnSquareIcon className="h-6 w-6 cursor-pointer" />
+          <div>App Exclusive</div>
+        </div>
+        <div className='flex flex-col justify-center items-center'>
+          <BellAlertIcon className="h-6 w-6 cursor-pointer" />
+          <div>About Us</div>
+        </div>
+      </footer>
     </main>
   )
 }
